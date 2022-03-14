@@ -18,3 +18,14 @@ it('can make an actual request to Sovren', function () {
         ->yearsOfExperience()->toBe(0)
         ->summary()->toBe("Administrative support professional offering versatile office management skills and proficiency in Microsoft Office programs. Strong planner and problem solver who readily adapts to change, works independently and exceeds expectations. Able to juggle multiple priorities and meet tight deadlines without compromising quality.");
 });
+
+it('throws an exception when using an unsupported region', function () {
+    $sovren = new SovrenParser(
+        new Factory(),
+        '1234',
+        'password',
+        'foo',
+    );
+
+    $sovren->parse(fakeCVContent());
+})->throws(InvalidArgumentException::class);
