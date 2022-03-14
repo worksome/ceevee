@@ -2,11 +2,11 @@
 
 use Worksome\Ceevee\Tests\TestCase;
 
-uses(TestCase::class)->in('Feature');
+uses(TestCase::class)->in(__DIR__ . '/Feature');
 
 function fakeCVFilePath(): string
 {
-    return __DIR__ . '/Stubs/CVs/john_williams.jpg';
+    return __DIR__ . '/Stubs/CVs/hannah_mills.pdf';
 }
 
 function fakeCVContent(): string

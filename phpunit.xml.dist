@@ -19,12 +19,8 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="Unit tests">
-            <directory>tests/Unit</directory>
-        </testsuite>
-
-        <testsuite name="Feature tests">
-            <directory>tests/Feature</directory>
+        <testsuite name="Tests">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <php>
