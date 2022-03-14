@@ -19,8 +19,15 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="VendorName Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Unit tests">
+            <directory>tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Feature tests">
+            <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="CEEVEE_DRIVER" value="null"/>
+    </php>
 </phpunit>

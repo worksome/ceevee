@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "worksome/ceevee",
+    "description": "Simple CV and Resume parsing for Laravel applications.",
     "keywords": [
-        ":vendor_name",
+        "worksome",
         "laravel",
-        ":package_slug"
+        "ceevee"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/worksome/ceevee",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Luke Downing",
+            "email": "lukeraymonddowning@gmail.com",
             "role": "Developer"
         }
     ],
@@ -33,13 +33,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Worksome\\Ceevee\\": "src",
+            "Worksome\\Ceevee\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Worksome\\Ceevee\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,15 +55,20 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "worksome/coding-style": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Worksome\\Ceevee\\CeeveeServiceProvider\\Providers"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Ceevee": "Worksome\\Ceevee\\Facades\\Ceevee"
             }
         }
     },

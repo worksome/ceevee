@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Worksome\Ceevee\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CeeveeCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'ceevee';
 
     public $description = 'My command';
 
