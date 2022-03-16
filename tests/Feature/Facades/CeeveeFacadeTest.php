@@ -21,18 +21,18 @@ it('can read a File', function ($file) {
 
 it('can fake CV details', function () {
     Ceevee::fake(
-        CVDetailFactory::new()->withYearsOfExperience(5)->create(),
-        CVDetailFactory::new()->withYearsOfExperience(7)->create(),
+        CVDetailFactory::new()->withMonthsOfExperience(5)->create(),
+        CVDetailFactory::new()->withMonthsOfExperience(7)->create(),
     );
 
     // The first request uses the first given factory.
-    expect(Ceevee::read(fakeCVFilePath())->yearsOfExperience())->toBe(5);
+    expect(Ceevee::read(fakeCVFilePath())->monthsOfExperience())->toBe(5);
 
     // The second request uses the second given factory.
-    expect(Ceevee::read(fakeCVFilePath())->yearsOfExperience())->toBe(7);
+    expect(Ceevee::read(fakeCVFilePath())->monthsOfExperience())->toBe(7);
 
     // The third request loops back to the beginning of the given sequence requests.
-    expect(Ceevee::read(fakeCVFilePath())->yearsOfExperience())->toBe(5);
+    expect(Ceevee::read(fakeCVFilePath())->monthsOfExperience())->toBe(5);
 });
 
 it('can assert the number of times a read occurred', function (int $timesRead) {

@@ -6,21 +6,43 @@ namespace Worksome\Ceevee\Support;
 
 final class CVDetail
 {
+    /**
+     * @param array<int, Skill> $skills
+     * @param array<int, Link> $links
+     */
     public function __construct(
-        private ?int $yearsOfExperience = null,
+        private array $skills,
+        private ?int $monthsOfExperience = null,
         private ?string $summary = null,
+        private array $links = [],
         private mixed $rawResponse = null,
     ) {
     }
 
-    public function yearsOfExperience(): ?int
+    public function monthsOfExperience(): ?int
     {
-        return $this->yearsOfExperience;
+        return $this->monthsOfExperience;
     }
 
     public function summary(): ?string
     {
         return $this->summary;
+    }
+
+    /**
+     * @return array<int, Skill>
+     */
+    public function skills(): array
+    {
+        return $this->skills;
+    }
+
+    /**
+     * @return array<int, Link>
+     */
+    public function links(): array
+    {
+        return $this->links;
     }
 
     public function fullResponse(): mixed
