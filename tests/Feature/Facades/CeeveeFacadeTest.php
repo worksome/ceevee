@@ -46,3 +46,11 @@ it('can assert the number of times a read occurred', function (int $timesRead) {
     expect(fn () => Ceevee::assertRead($timesRead - 1))->toThrow(ExpectationFailedException::class);
     expect(fn () => Ceevee::assertRead($timesRead + 1))->toThrow(ExpectationFailedException::class);
 })->with(fn () => range(2, 10));
+
+it('can create a sovren driver', function () {
+    config()->set('ceevee.default', 'sovren');
+
+    $detail = Ceevee::read(fakeCVFilePath('Hannah Mills'));
+
+    expect($detail)->toBeInstanceOf(CVDetail::class);
+})->group('integration');
