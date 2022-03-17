@@ -70,21 +70,52 @@ it('can return links correctly', function () {
         ->links();
 
     expect($links)
-        ->toHaveCount(4)
+        ->toHaveCount(7)
         ->sequence(
+            // The first 4 links come from actual discovered links
             fn ($link) => $link->getName()->toBe('www.linkedin.com'),
             fn ($link) => $link->getName()->toBe('github.com/olivernybroe'),
             fn ($link) => $link->getName()->toBe('pcservicecenter.dk'),
             fn ($link) => $link->getName()->toBe('www.linkedin.com'),
+            // The last 3 links come from contact methods
+            fn ($link) => $link->getName()->toBe('linkedIn'),
+            fn ($link) => $link->getName()->toBe('github'),
+            fn ($link) => $link->getName()->toBe('linkedIn'),
         );
 });
 
-it('will return an empty array for links on CVs with no link', function () {
+it('will return an empty array for `links()` when a CV has no links', function () {
     $links = sovrenParser(SovrenHttpFactory::new()->for('Hannah Mills')->create())
         ->parse(fakeCVContent('Hannah Mills'))
         ->links();
 
     expect($links)->toBeArray()->toBeEmpty();
+});
+
+it('can return the base64 encoded profile picture', function () {
+    $sovren = sovrenParser(
+        SovrenHttpFactory::new()->for('Han Boetes')->create(),
+        options: [
+            'OutputCandidateImage' => true
+        ],
+    );
+
+    $image = $sovren->parse(fakeCVContent('Han Boetes'))->profilePicture();
+
+    expect($image)->toBeBase64EncodedImage();
+});
+
+it('will return null for the profile picture of CVs with no provided image', function () {
+    $sovren = sovrenParser(
+        SovrenHttpFactory::new()->for('Hannah Mills')->create(),
+        options: [
+            'OutputCandidateImage' => true
+        ],
+    );
+
+    $image = $sovren->parse(fakeCVContent('Hannah Mills'))->profilePicture();
+
+    expect($image)->toBeNull();
 });
 
 it('throws an exception when using an unsupported region', function () {

@@ -26,7 +26,6 @@ final class SovrenParser implements Parser
     public function parse(string $content): CVDetail
     {
         $baseRequest = $this->makeRequest($content);
-
         $details = json_decode($baseRequest['Value']['ParsedDocument'], true)['Resume'];
 
         return new CVDetail(
@@ -34,6 +33,7 @@ final class SovrenParser implements Parser
             $this->getMonthsOfExperience($details),
             $this->getSummary($details),
             $this->getLinks($details),
+            $baseRequest['Value']['CandidateImage'] ?? null,
             $baseRequest,
         );
     }
@@ -72,17 +72,26 @@ final class SovrenParser implements Parser
     private function getLinks(array $details): array
     {
         $linkDetails = data_get($details, 'UserArea.sov:ResumeUserArea.sov:ReservedData.sov:Urls.sov:Url', []);
+        $contactMethodDetails = data_get($details, 'StructuredXMLResume.ContactInfo.ContactMethod');
 
-        return collect($linkDetails)
+        $directLinks = collect($linkDetails)
             ->map(function (string $link) {
                 $parts = parse_url($link);
 
                 return $parts === false
                     ? null
                     : new Link($parts['host'] ?? $parts['path'], $link);
-            })
-            ->filter()
-            ->all();
+            });
+
+        $linksFromContactMethods = collect($contactMethodDetails)
+            ->filter(fn (array $details) => array_key_exists('InternetWebAddress', $details))
+            ->map(fn (array $details) => new Link($details['Use'] ?? $details['InternetWebAddress'], $details['InternetWebAddress']));
+
+        return $directLinks->merge($linksFromContactMethods)->filter()->all();
+    }
+
+    private function getProfilePicture(array $details): string|null
+    {
     }
 
     /**

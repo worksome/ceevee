@@ -15,6 +15,7 @@ final class CVDetail
         private ?int $monthsOfExperience = null,
         private ?string $summary = null,
         private array $links = [],
+        private ?string $profilePicture = null,
         private mixed $rawResponse = null,
     ) {
     }
@@ -43,6 +44,16 @@ final class CVDetail
     public function links(): array
     {
         return $this->links;
+    }
+
+    /**
+     * The profile picture of the applicant, if one
+     * has been provided, as a base 64 encoded
+     * string.
+     */
+    public function profilePicture(): string|null
+    {
+        return $this->profilePicture;
     }
 
     public function fullResponse(): mixed

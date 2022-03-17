@@ -8,6 +8,8 @@ use Illuminate\Http\Client\Factory;
 
 uses(TestCase::class)->in(__DIR__ . '/Feature');
 
+// Test functions
+
 function fakeCVFilePath(string $for = 'Hannah Mills'): string
 {
     $name = Str::snake($for);
@@ -30,3 +32,15 @@ function sovrenParser(Factory|null $client = null, string $region = 'eu', array 
         $options,
     );
 }
+
+// Expectation extensions
+
+expect()->extend('toBeBase64EncodedImage', function () {
+    expect($this->value)->toBeString();
+    expect(imagecreatefromstring(base64_decode($this->value)))->not->toBeFalse();
+    expect(getimagesizefromstring(base64_decode($this->value)))
+        ->toBeArray()
+        ->not->toBeEmpty();
+
+    return $this;
+});

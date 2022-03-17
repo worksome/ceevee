@@ -13,10 +13,10 @@ it('can read a File', function ($file) {
     expect(Ceevee::read($file))->toBeInstanceOf(CVDetail::class);
 })->with([
     'File instance' => fn () => UploadedFile::fake()->createWithContent('my_cv.pdf', fakeCVContent()),
-    'string path' => fn () => __DIR__ . '/../../Stubs/CVs/john_williams.jpg',
+    'string path' => fn () => __DIR__ . '/../../Stubs/CVs/hannah_mills.pdf',
     'fromFile' => fn () => Content::fromFile(UploadedFile::fake()->createWithContent('my_cv.pdf', fakeCVContent())),
     'fromRaw' => fn () => Content::fromRaw(fakeCVContent()),
-    'fromPath' => fn () => Content::fromPath(__DIR__ . '/../../Stubs/CVs/john_williams.jpg'),
+    'fromPath' => fn () => Content::fromPath(__DIR__ . '/../../Stubs/CVs/hannah_mills.pdf'),
 ]);
 
 it('can fake CV details', function () {

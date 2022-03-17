@@ -24,6 +24,8 @@ final class CVDetailFactory
      */
     private array $links = [];
 
+    private string|null $profilePicture = null;
+
     public static function new(): self
     {
         return new self();
@@ -60,6 +62,13 @@ final class CVDetailFactory
         return $this;
     }
 
+    public function withProfilePicture(string $filePath): self
+    {
+        $this->profilePicture = base64_encode(file_get_contents($filePath));
+
+        return $this;
+    }
+
     public function create(): CVDetail
     {
         return new CVDetail(
@@ -67,6 +76,7 @@ final class CVDetailFactory
             $this->monthsOfExperience,
             $this->summary,
             $this->links,
+            $this->profilePicture,
         );
     }
 
