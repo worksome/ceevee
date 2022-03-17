@@ -10,6 +10,7 @@ use InvalidArgumentException;
 use Worksome\Ceevee\Contracts\Parser;
 use Worksome\Ceevee\Parsers\SovrenParser\ContactInformationParser;
 use Worksome\Ceevee\Parsers\SovrenParser\EducationParser;
+use Worksome\Ceevee\Parsers\SovrenParser\EmploymentHistoryParser;
 use Worksome\Ceevee\Parsers\SovrenParser\LinksParser;
 use Worksome\Ceevee\Parsers\SovrenParser\SkillsParser;
 use Worksome\Ceevee\Support\CVDetail;
@@ -38,6 +39,7 @@ final class SovrenParser implements Parser
             $baseRequest['Value']['CandidateImage'] ?? null,
             (new EducationParser($details))(),
             (new ContactInformationParser($details))(),
+            (new EmploymentHistoryParser($details))(),
             $baseRequest,
         );
     }

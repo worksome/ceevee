@@ -10,6 +10,7 @@ final class CVDetail
      * @param array<int, Skill> $skills
      * @param array<int, Link> $links
      * @param array<int, Education> $education
+     * @param array<int, Employment> $employmentHistory
      */
     public function __construct(
         private array $skills,
@@ -19,6 +20,7 @@ final class CVDetail
         private string|null $profilePicture,
         private array $education,
         private ContactInformation $contactInformation,
+        private array $employmentHistory,
         private mixed $rawResponse = null,
     ) {
     }
@@ -70,6 +72,11 @@ final class CVDetail
     public function contactInformation(): ContactInformation
     {
         return $this->contactInformation;
+    }
+
+    public function employmentHistory(): array
+    {
+        return $this->employmentHistory;
     }
 
     public function fullResponse(): mixed

@@ -7,6 +7,7 @@ namespace Worksome\Ceevee\Testing;
 use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\CVDetail;
 use Worksome\Ceevee\Support\Education;
+use Worksome\Ceevee\Support\Employment;
 use Worksome\Ceevee\Support\Link;
 use Worksome\Ceevee\Support\Skill;
 
@@ -34,6 +35,11 @@ final class CVDetailFactory
     private array $education = [];
 
     private ContactInformation|null $contactInformation = null;
+
+    /**
+     * @var array<int, Employment>
+     */
+    private array $employmentHistory = [];
 
     public static function new(): self
     {
@@ -92,6 +98,13 @@ final class CVDetailFactory
         return $this;
     }
 
+    public function withEmploymentHistory(Employment ...$employment): self
+    {
+        $this->employmentHistory = $employment;
+
+        return $this;
+    }
+
     public function create(): CVDetail
     {
         return new CVDetail(
@@ -102,6 +115,7 @@ final class CVDetailFactory
             $this->profilePicture,
             $this->education,
             $this->buildContactInformation(),
+            $this->buildEmploymentHistory(),
         );
     }
 
@@ -158,5 +172,13 @@ final class CVDetailFactory
             '07123456789',
             'test@test.com',
         );
+    }
+
+    /**
+     * @return array<int, Employment>
+     */
+    private function buildEmploymentHistory(): array
+    {
+        return $this->employmentHistory;
     }
 }

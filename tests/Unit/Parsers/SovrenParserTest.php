@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Http\Client\Factory;
 use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\Education;
+use Worksome\Ceevee\Support\Employment;
 use Worksome\Ceevee\Support\Skill;
 
 it('can make an actual request to Sovren', function () {
@@ -179,6 +180,26 @@ it('can return contact information', function (string $name, $expectations) {
             ->getEmailAddress()->toBe('hannah.mills@gmailing.com')
     ]
 ]);
+
+it('includes employment history', function () {
+    $employmentHistory = sovrenParser('Oliver Nybroe')
+        ->parse(fakeCVContent('Oliver Nybroe'))
+        ->employmentHistory();
+
+    expect($employmentHistory)
+        ->toBeArray()->toHaveCount(11)
+        ->each->toBeInstanceOf(Employment::class);
+
+    expect($employmentHistory[0])
+        ->getType()->toBe('directHire')
+        ->getCompany()->toBe('Worksome')
+        ->getName()->toBe('Technical Team Lead')
+        ->getDescription()->toBe('Capital Region, Denmark')
+        ->getMunicipality()->toBe('Copenhagen')
+        ->getCountryCode()->toBe('DK')
+        ->getStartDate()->toBe('2022-01-01')
+        ->getEndDate()->toBeNull();
+});
 
 it('throws an exception when using an unsupported region', function () {
     sovrenParser(region: 'foo')->parse(fakeCVContent());
