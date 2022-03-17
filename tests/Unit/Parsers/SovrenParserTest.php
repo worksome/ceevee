@@ -6,6 +6,7 @@ use Illuminate\Http\Client\Factory;
 use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\Education;
 use Worksome\Ceevee\Support\Employment;
+use Worksome\Ceevee\Support\Language;
 use Worksome\Ceevee\Support\Skill;
 
 it('can make an actual request to Sovren', function () {
@@ -199,6 +200,20 @@ it('includes employment history', function () {
         ->getCountryCode()->toBe('DK')
         ->getStartDate()->toBe('2022-01-01')
         ->getEndDate()->toBeNull();
+});
+
+it('includes languages spoken', function () {
+    $languages = sovrenParser('Oliver Nybroe')
+        ->parse(fakeCVContent('Oliver Nybroe'))
+        ->languagesSpoken();
+
+    expect($languages)
+        ->toBeArray()->toHaveCount(2)
+        ->sequence(
+            fn ($language) => $language->getCode()->toBe('en'),
+            fn ($language) => $language->getCode()->toBe('da'),
+        )
+        ->each(fn ($language) => $language->getFluency()->toBe(Language::FLUENCY_GREAT));
 });
 
 it('throws an exception when using an unsupported region', function () {

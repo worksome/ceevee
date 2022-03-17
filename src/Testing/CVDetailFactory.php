@@ -8,6 +8,7 @@ use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\CVDetail;
 use Worksome\Ceevee\Support\Education;
 use Worksome\Ceevee\Support\Employment;
+use Worksome\Ceevee\Support\Language;
 use Worksome\Ceevee\Support\Link;
 use Worksome\Ceevee\Support\Skill;
 
@@ -40,6 +41,11 @@ final class CVDetailFactory
      * @var array<int, Employment>
      */
     private array $employmentHistory = [];
+
+    /**
+     * @var array<int, Language>
+     */
+    private array $languagesSpoken = [];
 
     public static function new(): self
     {
@@ -105,6 +111,13 @@ final class CVDetailFactory
         return $this;
     }
 
+    public function withAbilityToSpeakIn(Language ...$languages): self
+    {
+        $this->languagesSpoken = $languages;
+
+        return $this;
+    }
+
     public function create(): CVDetail
     {
         return new CVDetail(
@@ -116,6 +129,7 @@ final class CVDetailFactory
             $this->education,
             $this->buildContactInformation(),
             $this->buildEmploymentHistory(),
+            $this->languagesSpoken,
         );
     }
 
