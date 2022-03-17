@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Http\Client\Factory;
+use Worksome\Ceevee\Support\ContactInformation;
+use Worksome\Ceevee\Support\Education;
 use Worksome\Ceevee\Support\Skill;
-use Worksome\Ceevee\Tests\Factories\Http\Sovren\SovrenHttpFactory;
 
 it('can make an actual request to Sovren', function () {
     // We'll pass in an unmodified factory so that we make a real request.
@@ -22,14 +23,14 @@ it('correctly builds the skill set', function () {
         ->toBeArray()
         ->toHaveCount(8)
         ->sequence(
-            fn ($skill) => $skill->percentageOfParent()->toBe(50),
-            fn ($skill) => $skill->percentageOfParent()->toBe(23),
-            fn ($skill) => $skill->percentageOfParent()->toBe(7),
-            fn ($skill) => $skill->percentageOfParent()->toBe(6),
-            fn ($skill) => $skill->percentageOfParent()->toBe(5),
-            fn ($skill) => $skill->percentageOfParent()->toBe(5),
-            fn ($skill) => $skill->percentageOfParent()->toBe(5),
-            fn ($skill) => $skill->percentageOfParent()->toBe(0),
+            fn($skill) => $skill->percentageOfParent()->toBe(50),
+            fn($skill) => $skill->percentageOfParent()->toBe(23),
+            fn($skill) => $skill->percentageOfParent()->toBe(7),
+            fn($skill) => $skill->percentageOfParent()->toBe(6),
+            fn($skill) => $skill->percentageOfParent()->toBe(5),
+            fn($skill) => $skill->percentageOfParent()->toBe(5),
+            fn($skill) => $skill->percentageOfParent()->toBe(5),
+            fn($skill) => $skill->percentageOfParent()->toBe(0),
         );
 
     expect($skills[0])
@@ -46,7 +47,7 @@ it('will not include skills called "no skills found"', function () {
      * That's useless information for an actual Skill object, so it should
      * be skipped when building skills. This test ensures that happens.
      */
-    $skills = sovrenParser(SovrenHttpFactory::new()->for('Sean Skilless')->create())
+    $skills = sovrenParser('Sean Skilless')
         ->parse(fakeCVContent())
         ->skills();
 
@@ -54,7 +55,7 @@ it('will not include skills called "no skills found"', function () {
 });
 
 it('can return months of experience', function (string $name, int $expectedMonthsOfExperience) {
-    $experience = sovrenParser(SovrenHttpFactory::new()->for($name)->create())
+    $experience = sovrenParser($name)
         ->parse(fakeCVContent())
         ->monthsOfExperience();
 
@@ -65,27 +66,27 @@ it('can return months of experience', function (string $name, int $expectedMonth
 ]);
 
 it('can return links correctly', function () {
-    $links = sovrenParser(SovrenHttpFactory::new()->for('Oliver Nybroe')->create())
+    $links = sovrenParser('Oliver Nybroe')
         ->parse(fakeCVContent('Oliver Nybroe'))
         ->links();
 
     expect($links)
         ->toHaveCount(7)
         ->sequence(
-            // The first 4 links come from actual discovered links
-            fn ($link) => $link->getName()->toBe('www.linkedin.com'),
-            fn ($link) => $link->getName()->toBe('github.com/olivernybroe'),
-            fn ($link) => $link->getName()->toBe('pcservicecenter.dk'),
-            fn ($link) => $link->getName()->toBe('www.linkedin.com'),
+        // The first 4 links come from actual discovered links
+            fn($link) => $link->getName()->toBe('www.linkedin.com'),
+            fn($link) => $link->getName()->toBe('github.com/olivernybroe'),
+            fn($link) => $link->getName()->toBe('pcservicecenter.dk'),
+            fn($link) => $link->getName()->toBe('www.linkedin.com'),
             // The last 3 links come from contact methods
-            fn ($link) => $link->getName()->toBe('linkedIn'),
-            fn ($link) => $link->getName()->toBe('github'),
-            fn ($link) => $link->getName()->toBe('linkedIn'),
+            fn($link) => $link->getName()->toBe('linkedIn'),
+            fn($link) => $link->getName()->toBe('github'),
+            fn($link) => $link->getName()->toBe('linkedIn'),
         );
 });
 
 it('will return an empty array for `links()` when a CV has no links', function () {
-    $links = sovrenParser(SovrenHttpFactory::new()->for('Hannah Mills')->create())
+    $links = sovrenParser('Hannah Mills')
         ->parse(fakeCVContent('Hannah Mills'))
         ->links();
 
@@ -94,7 +95,7 @@ it('will return an empty array for `links()` when a CV has no links', function (
 
 it('can return the base64 encoded profile picture', function () {
     $sovren = sovrenParser(
-        SovrenHttpFactory::new()->for('Han Boetes')->create(),
+        'Han Boetes',
         options: [
             'OutputCandidateImage' => true
         ],
@@ -107,7 +108,7 @@ it('can return the base64 encoded profile picture', function () {
 
 it('will return null for the profile picture of CVs with no provided image', function () {
     $sovren = sovrenParser(
-        SovrenHttpFactory::new()->for('Hannah Mills')->create(),
+        'Hannah Mills',
         options: [
             'OutputCandidateImage' => true
         ],
@@ -117,6 +118,67 @@ it('will return null for the profile picture of CVs with no provided image', fun
 
     expect($image)->toBeNull();
 });
+
+it('can return an education array', function () {
+    $education = sovrenParser('Hannah Mills')
+        ->parse(fakeCVContent('Hannah Mills'))
+        ->education();
+
+    expect($education)
+        ->ray()
+        ->toBeArray()->toHaveCount(1)
+        ->{0}->toBeInstanceOf(Education::class)
+        ->{0}->getName()->toBe('SOUTH LONDON COLLEGE');
+});
+
+it('can correctly parse degrees as part of education', function () {
+    $education = sovrenParser('Oliver Nybroe')
+        ->parse(fakeCVContent('Oliver Nybroe'))
+        ->education();
+
+    expect($education)
+        ->toBeArray()->toHaveCount(3)
+        ->sequence(
+            fn($uni) => $uni->getDegree()->toBe('Bachelors'),
+            fn($udacity) => $udacity->getDegree()->toBeNull(),
+            fn($uni) => $uni->getDegree()->toBe('Bachelors'),
+        );
+
+    expect($education[0])
+        ->getFromYear()->toBe('2016')
+        ->getToYear()->toBe('2020');
+});
+
+it('can return contact information', function (string $name, $expectations) {
+    $contactInformation = sovrenParser($name)
+        ->parse(fakeCVContent($name))
+        ->contactInformation();
+
+    $expectations(expect($contactInformation)->toBeInstanceOf(ContactInformation::class));
+})->with([
+    [
+        'Oliver Nybroe',
+        fn() => fn ($information) => $information
+            ->getMunicipality()->toBe('Copenhagen')
+            ->getCountryCode()->toBe('DK')
+            ->getEmailAddress()->toBe('olivernybroe@gmail.com')
+    ],
+    [
+        'Han Boetes',
+        fn() => fn ($information) => $information
+            ->getTelephoneNumber()->toBe('+43 6 8181 5268 21')
+            ->getEmailAddress()->toBe('hboetes@gmail.com')
+    ],
+    [
+        'Hannah Mills',
+        fn() => fn($information) => $information
+            ->getAddressLine()->toBe('189 Chobham Gardens')
+            ->getMunicipality()->toBe('Putney')
+            ->getCountryCode()->toBe('UK')
+            ->getMobileNumber()->toBe('077777722')
+            ->getEmailAddress()->toBe('hannah.mills@gmailing.com')
+    ]
+]);
 
 it('throws an exception when using an unsupported region', function () {
     sovrenParser(region: 'foo')->parse(fakeCVContent());

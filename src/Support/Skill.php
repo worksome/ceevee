@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Worksome\Ceevee\Support;
 
-use Worksome\Ceevee\Support\Concerns\HasPercentageOfParent;
-
 final class Skill
 {
-    use HasPercentageOfParent;
-
     /**
      * @var array<int, Skill>
      */

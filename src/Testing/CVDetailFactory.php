@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Worksome\Ceevee\Testing;
 
+use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\CVDetail;
+use Worksome\Ceevee\Support\Education;
 use Worksome\Ceevee\Support\Link;
 use Worksome\Ceevee\Support\Skill;
 
@@ -25,6 +27,13 @@ final class CVDetailFactory
     private array $links = [];
 
     private string|null $profilePicture = null;
+
+    /**
+     * @var array<int, Education>
+     */
+    private array $education = [];
+
+    private ContactInformation|null $contactInformation = null;
 
     public static function new(): self
     {
@@ -69,6 +78,20 @@ final class CVDetailFactory
         return $this;
     }
 
+    public function withEducation(Education ...$education): self
+    {
+        $this->education = $education;
+
+        return $this;
+    }
+
+    public function withContactInformation(ContactInformation $contactInformation): self
+    {
+        $this->contactInformation = $contactInformation;
+
+        return $this;
+    }
+
     public function create(): CVDetail
     {
         return new CVDetail(
@@ -77,6 +100,8 @@ final class CVDetailFactory
             $this->summary,
             $this->links,
             $this->profilePicture,
+            $this->education,
+            $this->buildContactInformation(),
         );
     }
 
@@ -116,5 +141,22 @@ final class CVDetailFactory
                         ),
                 ),
         ];
+    }
+
+    private function buildContactInformation(): ContactInformation
+    {
+        if ($this->contactInformation !== null) {
+            return $this->contactInformation;
+        }
+
+        return new ContactInformation(
+            '1 Foo Street',
+            'Copenhagen',
+            'T3ST 1NG',
+            'DK',
+            '01234567890',
+            '07123456789',
+            'test@test.com',
+        );
     }
 }

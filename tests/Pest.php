@@ -22,8 +22,12 @@ function fakeCVContent(string $for = 'Hannah Mills'): string
     return file_get_contents(fakeCVFilePath($for));
 }
 
-function sovrenParser(Factory|null $client = null, string $region = 'eu', array $options = []): SovrenParser
+function sovrenParser(Factory|string|null $client = null, string $region = 'eu', array $options = []): SovrenParser
 {
+    if (is_string($client)) {
+        $client = SovrenHttpFactory::new()->for($client)->create();
+    }
+
     return new SovrenParser(
         $client ?? SovrenHttpFactory::new()->create(),
         $_ENV['SOVREN_ACCOUNT_ID'] ?? '1234',

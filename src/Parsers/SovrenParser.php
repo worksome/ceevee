@@ -8,7 +8,9 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\RequestException;
 use InvalidArgumentException;
 use Worksome\Ceevee\Contracts\Parser;
+use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\CVDetail;
+use Worksome\Ceevee\Support\Education;
 use Worksome\Ceevee\Support\Link;
 use Worksome\Ceevee\Support\Skill;
 
@@ -34,6 +36,8 @@ final class SovrenParser implements Parser
             $this->getSummary($details),
             $this->getLinks($details),
             $baseRequest['Value']['CandidateImage'] ?? null,
+            $this->getEducation($details),
+            $this->getContactInformation($details),
             $baseRequest,
         );
     }
@@ -84,14 +88,81 @@ final class SovrenParser implements Parser
             });
 
         $linksFromContactMethods = collect($contactMethodDetails)
-            ->filter(fn (array $details) => array_key_exists('InternetWebAddress', $details))
-            ->map(fn (array $details) => new Link($details['Use'] ?? $details['InternetWebAddress'], $details['InternetWebAddress']));
+            ->filter(fn(array $details) => array_key_exists('InternetWebAddress', $details))
+            ->map(fn(array $details) => new Link($details['Use'] ?? $details['InternetWebAddress'], $details['InternetWebAddress']));
 
         return $directLinks->merge($linksFromContactMethods)->filter()->all();
     }
 
-    private function getProfilePicture(array $details): string|null
+    /**
+     * @param array<string, mixed> $details
+     * @return array<int, Education>
+     */
+    private function getEducation(array $details): array
     {
+        $educationDetails = data_get($details, 'StructuredXMLResume.EducationHistory.SchoolOrInstitution');
+
+        return collect($educationDetails)
+            ->map(function (array $details) {
+                $degree = data_get($details, 'Degree.0.UserArea.sov:DegreeUserArea.sov:NormalizedDegreeName') ?? data_get($details, 'Degree.0.DegreeName');
+
+                $field = data_get($details, 'Degree.0.DegreeMajor.0.Name.0');
+                $minor = data_get($details, 'Degree.0.DegreeMinor.0.Name.0');
+
+                if ($field !== null && $minor !== null) {
+                    $field .= ' (Minor in ' . ucfirst($minor) . ')';
+                }
+
+                return new Education(
+                    data_get($details, 'UserArea.sov:SchoolOrInstitutionTypeUserArea.sov:NormalizedSchoolName') ?? data_get($details, 'School.0.SchoolName'),
+                    data_get($details, 'Degree.0.DatesOfAttendance.0.StartDate.Year'),
+                    data_get($details, 'Degree.0.DatesOfAttendance.0.EndDate.Year'),
+                    $degree === null ? null : ucfirst($degree),
+                    $field === null ? null : ucfirst($field),
+                );
+            })
+            ->all();
+    }
+
+    /**
+     * @param array<string, mixed> $details
+     */
+    public function getContactInformation(array $details): ContactInformation
+    {
+        $contactMethods = data_get($details, 'StructuredXMLResume.ContactInfo.ContactMethod');
+
+        $contactParts = [
+            'addressLine' => null,
+            'municipality' => null,
+            'postalCode' => null,
+            'countryCode' => null,
+            'telephoneNumber' => null,
+            'mobileNumber' => null,
+            'emailAddress' => null,
+        ];
+
+        collect($contactMethods)->each(function (array $details) use (&$contactParts) {
+            if (array_key_exists('PostalAddress', $details)) {
+                $contactParts['addressLine'] = data_get($details, 'PostalAddress.DeliveryAddress.AddressLine.0');
+                $contactParts['municipality'] = data_get($details, 'PostalAddress.Municipality');
+                $contactParts['postalCode'] = data_get($details, 'PostalAddress.PostalCode');
+                $contactParts['countryCode'] = data_get($details, 'PostalAddress.CountryCode');
+            }
+
+            if (array_key_exists('Telephone', $details)) {
+                $contactParts['telephoneNumber'] = data_get($details, 'Telephone.FormattedNumber');
+            }
+
+            if (array_key_exists('Mobile', $details)) {
+                $contactParts['mobileNumber'] = data_get($details, 'Mobile.FormattedNumber');
+            }
+
+            if (array_key_exists('InternetEmailAddress', $details)) {
+                $contactParts['emailAddress'] = data_get($details, 'InternetEmailAddress');
+            }
+        });
+
+        return new ContactInformation(...$contactParts);
     }
 
     /**

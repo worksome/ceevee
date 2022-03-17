@@ -9,23 +9,26 @@ final class CVDetail
     /**
      * @param array<int, Skill> $skills
      * @param array<int, Link> $links
+     * @param array<int, Education> $education
      */
     public function __construct(
         private array $skills,
-        private ?int $monthsOfExperience = null,
-        private ?string $summary = null,
-        private array $links = [],
-        private ?string $profilePicture = null,
+        private int|null $monthsOfExperience,
+        private string|null $summary,
+        private array $links,
+        private string|null $profilePicture,
+        private array $education,
+        private ContactInformation $contactInformation,
         private mixed $rawResponse = null,
     ) {
     }
 
-    public function monthsOfExperience(): ?int
+    public function monthsOfExperience(): int|null
     {
         return $this->monthsOfExperience;
     }
 
-    public function summary(): ?string
+    public function summary(): string|null
     {
         return $this->summary;
     }
@@ -54,6 +57,19 @@ final class CVDetail
     public function profilePicture(): string|null
     {
         return $this->profilePicture;
+    }
+
+    /**
+     * @return array<int, Education>
+     */
+    public function education(): array
+    {
+        return $this->education;
+    }
+
+    public function contactInformation(): ContactInformation
+    {
+        return $this->contactInformation;
     }
 
     public function fullResponse(): mixed
