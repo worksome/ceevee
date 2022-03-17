@@ -175,7 +175,7 @@ it('can return contact information', function (string $name, $expectations) {
             ->getAddressLine()->toBe('189 Chobham Gardens')
             ->getMunicipality()->toBe('Putney')
             ->getCountryCode()->toBe('UK')
-            ->getMobileNumber()->toBe('077777722')
+            ->getMobileNumber()->toBe('+44 077777722')
             ->getEmailAddress()->toBe('hannah.mills@gmailing.com')
     ]
 ]);
