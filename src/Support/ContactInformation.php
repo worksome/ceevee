@@ -47,6 +47,11 @@ final class ContactInformation
         return $this->mobileNumber;
     }
 
+    public function getPrimaryNumber(): string|null
+    {
+        return $this->getMobileNumber() ?? $this->getTelephoneNumber();
+    }
+
     public function getEmailAddress(): string|null
     {
         return $this->emailAddress;
