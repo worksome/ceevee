@@ -20,9 +20,9 @@ final class LanguageParser
         $primaryLanguage = $this->getPrimaryLanguage();
 
         $additionalLanguages = collect(data_get($this->details, 'StructuredXMLResume.Languages.Language', []))
-            ->pluck('Comments', 'LanguageCode')
-            ->map(fn ($comments, $languageCode) => $this->buildLanguage($languageCode, $comments))
-            ->filter(fn (Language $language) => $language->getCode() !== $primaryLanguage->getCode())
+            ->filter(fn (mixed $details) => is_array($details))
+            ->map(fn (array $details) => $this->buildLanguage($details['LanguageCode'], $details['Comments']))
+            ->filter(fn (Language|null $language) => $language?->getCode() !== $primaryLanguage?->getCode())
             ->values();
 
         return array_filter([$primaryLanguage, ...$additionalLanguages]);
@@ -35,6 +35,7 @@ final class LanguageParser
             'UserArea.sov:ResumeUserArea.sov:Culture.sov:Language',
         ];
 
+        /** @var string|null $primaryLanguageCode */
         $primaryLanguageCode = collect($nodesToCheck)
             ->map(fn (string $key) => data_get($this->details, $key))
             ->filter()

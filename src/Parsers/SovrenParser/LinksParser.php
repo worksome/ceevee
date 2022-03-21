@@ -25,7 +25,9 @@ final class LinksParser
     {
         $linkDetails = data_get($this->details, 'UserArea.sov:ResumeUserArea.sov:ReservedData.sov:Urls.sov:Url', []);
 
-        return collect($linkDetails)->map(fn (string $url) => $this->buildLinkFromUrl($url));
+        return collect($linkDetails)
+            ->filter(fn (mixed $url) => is_string($url))
+            ->map(fn (string $url) => $this->buildLinkFromUrl($url));
     }
 
     private function buildLinkFromUrl(string $url): Link|null
@@ -34,6 +36,7 @@ final class LinksParser
 
         return $parts === false
             ? null
+            // @phpstan-ignore-next-line
             : new Link($parts['host'] ?? $parts['path'], $url);
     }
 

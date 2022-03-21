@@ -24,10 +24,14 @@ final class ParserManager extends Manager
 
     public function createSovrenDriver(): SovrenParser
     {
+        /** @var array{account_id: string, service_key: string, region: string|null, options: array<mixed>|null} $options */
         $options = $this->config->get('ceevee.services.sovren');
 
+        /** @var Factory $factory */
+        $factory = $this->container->make(Factory::class);
+
         return new SovrenParser(
-            $this->container->make(Factory::class),
+            $factory,
             $options['account_id'],
             $options['service_key'],
             $options['region'] ?? 'eu',

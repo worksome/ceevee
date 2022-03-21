@@ -20,7 +20,8 @@ final class EducationParser
         $educationDetails = data_get($this->details, 'StructuredXMLResume.EducationHistory.SchoolOrInstitution');
 
         return collect($educationDetails)
-            ->map(fn (array $details) => $this->buildEducation($details))
+            ->filter(fn(mixed $details) => is_array($details))
+            ->map(fn(array $details) => $this->buildEducation($details))
             ->all();
     }
 
@@ -29,9 +30,12 @@ final class EducationParser
      */
     private function buildEducation(array $details): Education
     {
+        /** @var string|null $degree */
         $degree = data_get($details, 'Degree.0.UserArea.sov:DegreeUserArea.sov:NormalizedDegreeName') ?? data_get($details, 'Degree.0.DegreeName');
-
+        /** @var string|null $field */
         $field = data_get($details, 'Degree.0.DegreeMajor.0.Name.0');
+
+        /** @var string|null $minor */
         $minor = data_get($details, 'Degree.0.DegreeMinor.0.Name.0');
 
         if ($field !== null && $minor !== null) {
@@ -39,8 +43,11 @@ final class EducationParser
         }
 
         return new Education(
+            // @phpstan-ignore-next-line
             data_get($details, 'UserArea.sov:SchoolOrInstitutionTypeUserArea.sov:NormalizedSchoolName') ?? data_get($details, 'School.0.SchoolName'),
+            // @phpstan-ignore-next-line
             data_get($details, 'Degree.0.DatesOfAttendance.0.StartDate.Year'),
+            // @phpstan-ignore-next-line
             data_get($details, 'Degree.0.DatesOfAttendance.0.EndDate.Year'),
             $degree === null ? null : ucfirst($degree),
             $field === null ? null : ucfirst($field),

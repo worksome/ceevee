@@ -12,7 +12,7 @@ use InvalidArgumentException;
 
 final class SovrenHttpFactory
 {
-    const VERSION_9 = 9;
+    public const VERSION_9 = 9;
 
     private bool $makeActualRequest = false;
 

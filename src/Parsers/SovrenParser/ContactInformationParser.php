@@ -27,7 +27,9 @@ final class ContactInformationParser
     {
         $contactMethods = data_get($this->details, 'StructuredXMLResume.ContactInfo.ContactMethod');
 
-        collect($contactMethods)->each(fn (array $details) => $this->parseArrayNode($details));
+        collect($contactMethods)
+            ->filter(fn (mixed $details) => is_array($details))
+            ->each(fn (array $details) => $this->parseArrayNode($details));
 
         return new ContactInformation(...$this->contactParts);
     }
@@ -54,9 +56,9 @@ final class ContactInformationParser
         }
     }
 
-    private function cleanPhoneNumber(string|null $number): string|null
+    private function cleanPhoneNumber(mixed $number): string|null
     {
-        if ($number === null) {
+        if (! is_string($number)) {
             return null;
         }
 
@@ -72,6 +74,10 @@ final class ContactInformationParser
 
         $prefix = PhonePrefixes::for($countryCode);
         $strippedNumber = preg_replace('/\D/', '', $number);
+
+        if ($strippedNumber === null) {
+            return null;
+        }
 
         if (substr($strippedNumber, 0, strlen($prefix)) === $prefix) {
             return $number;

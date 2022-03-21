@@ -30,7 +30,21 @@ final class SovrenParser implements Parser
     public function parse(string $content): CVDetail
     {
         $baseRequest = $this->makeRequest($content);
-        $details = json_decode($baseRequest['Value']['ParsedDocument'], true)['Resume'];
+        $response = json_decode(strval(data_get($baseRequest, 'Value.ParsedDocument', '[]')), true);
+
+        if (! is_array($response)) {
+            $this->failBecauseOfBadResponse("The response from Sovren was malformed.");
+        }
+
+        if (! array_key_exists('Resume', $response)) {
+            $this->failBecauseOfBadResponse("No [Resume] field was detected.");
+        }
+
+        $details = $response['Resume'];
+
+        if (! is_array($details)) {
+            $this->failBecauseOfBadResponse();
+        }
 
         return new CVDetail(
             (new SkillsParser($details))(),
@@ -53,10 +67,11 @@ final class SovrenParser implements Parser
 
     private function getSummary(array $details): ?string
     {
+        /** @var string|null $summary */
         $summary = data_get($details, 'StructuredXMLResume.ExecutiveSummary');
 
         return $summary !== null
-            ? str_replace(["\r\n", "\r", "\n"], ' ', $summary)
+            ? strval(str_replace(["\r\n", "\r", "\n"], ' ', $summary))
             : null;
     }
 
@@ -65,7 +80,7 @@ final class SovrenParser implements Parser
      */
     private function makeRequest(string $content): array
     {
-        return $this
+        $data = $this
             ->client
             ->baseUrl($this->getBaseUrl())
             ->acceptJson()
@@ -80,6 +95,12 @@ final class SovrenParser implements Parser
             ))
             ->throw()
             ->json();
+
+        if (! is_array($data)) {
+            throw new InvalidArgumentException('The response from Sovren was of an unexpected format.');
+        }
+
+        return $data;
     }
 
     /**
@@ -98,5 +119,13 @@ final class SovrenParser implements Parser
             'au' => 'https://au-rest.resumeparsing.com/v9',
             default => throw new InvalidArgumentException("[{$this->region}] is not a supported Sovren region. Please use 'eu', 'us' or 'au'."),
         };
+    }
+
+    /**
+     * @return never-return
+     */
+    private function failBecauseOfBadResponse(string|null $reason = null): void
+    {
+        throw new InvalidArgumentException("The response from Sovren could not be parsed. $reason");
     }
 }

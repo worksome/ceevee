@@ -22,6 +22,7 @@ final class EmploymentHistoryParser
         $employmentHistory = data_get($this->details, 'StructuredXMLResume.EmploymentHistory.EmployerOrg', []);
 
         return collect($employmentHistory)
+            ->filter(fn ($detail) => is_array($detail))
             ->map(fn(array $detail) => $this->buildEmployment($detail))
             ->filter()
             ->all();
@@ -37,19 +38,29 @@ final class EmploymentHistoryParser
         $endDate = $this->parseDate(data_get($detail, 'PositionHistory.0.EndDate'));
 
         return new Employment(
+            // @phpstan-ignore-next-line
             data_get($detail, 'PositionHistory.0.@positionType'),
+            // @phpstan-ignore-next-line
             data_get($detail, 'EmployerOrgName'),
+            // @phpstan-ignore-next-line
             data_get($detail, 'PositionHistory.0.Title'),
+            // @phpstan-ignore-next-line
             data_get($detail, 'PositionHistory.0.Description'),
+            // @phpstan-ignore-next-line
             data_get($detail, 'PositionHistory.0.OrgInfo.0.PositionLocation.Municipality'),
+            // @phpstan-ignore-next-line
             data_get($detail, 'PositionHistory.0.OrgInfo.0.PositionLocation.CountryCode'),
             $startDate,
             $endDate,
         );
     }
 
-    private function parseDate(array|null $dateData): string|null
+    private function parseDate(mixed $dateData): string|null
     {
+        if (! is_array($dateData)) {
+            return null;
+        }
+
         $date = $this->createDateString($dateData);
 
         if ($date === null) {
@@ -68,7 +79,7 @@ final class EmploymentHistoryParser
     private function createDateString(array $dateData): string|null
     {
         if (array_key_exists('AnyDate', $dateData)) {
-            return data_get($dateData, 'AnyDate');
+            return strval(data_get($dateData, 'AnyDate'));
         }
 
         if (array_key_exists('YearMonth', $dateData)) {

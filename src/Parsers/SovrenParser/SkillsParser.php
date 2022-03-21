@@ -20,7 +20,8 @@ final class SkillsParser
         $rawSkills = data_get($this->details, 'UserArea.sov:ResumeUserArea.sov:ExperienceSummary.sov:SkillsTaxonomyOutput.sov:TaxonomyRoot.0.sov:Taxonomy');
 
         return collect($rawSkills)
-            ->map(fn(array $skillDetail) => $this->buildSkill($skillDetail))
+            ->filter(fn ($skillDetail) => is_array($skillDetail))
+            ->map(fn (array $skillDetail) => $this->buildSkill($skillDetail))
             ->filter()
             ->all();
     }
@@ -41,8 +42,10 @@ final class SkillsParser
             $skill->hasPercentageOfParent(intval($skillDetail['@percentOfParentTaxonomy']));
         }
 
-        return $skill->addSubSkills(...collect($skillDetail['sov:Subtaxonomy'] ?? $skillDetail['sov:Skill'] ?? [])->map(
-            fn(array $skillDetail) => $this->buildSkill($skillDetail)
-        ));
+        $subSkills = collect($skillDetail['sov:Subtaxonomy'] ?? $skillDetail['sov:Skill'] ?? [])
+            ->map(fn(array $skillDetail) => $this->buildSkill($skillDetail))
+            ->filter();
+
+        return $skill->addSubSkills(...$subSkills);
     }
 }

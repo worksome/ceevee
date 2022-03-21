@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Ceevee\Testing;
 
+use InvalidArgumentException;
 use Worksome\Ceevee\Support\ContactInformation;
 use Worksome\Ceevee\Support\CVDetail;
 use Worksome\Ceevee\Support\Education;
@@ -78,21 +79,27 @@ final class CVDetailFactory
 
     public function withLinks(Link ...$links): self
     {
-        $this->links = $links;
+        $this->links = array_values($links);
 
         return $this;
     }
 
     public function withProfilePicture(string $filePath): self
     {
-        $this->profilePicture = base64_encode(file_get_contents($filePath));
+        /** @var string $picture */
+        $picture = throw_unless(
+            file_get_contents($filePath),
+            new InvalidArgumentException("The given file path [$filePath] could not be read."),
+        );
+
+        $this->profilePicture = base64_encode($picture);
 
         return $this;
     }
 
     public function withEducation(Education ...$education): self
     {
-        $this->education = $education;
+        $this->education = array_values($education);
 
         return $this;
     }
@@ -106,14 +113,14 @@ final class CVDetailFactory
 
     public function withEmploymentHistory(Employment ...$employment): self
     {
-        $this->employmentHistory = $employment;
+        $this->employmentHistory = array_values($employment);
 
         return $this;
     }
 
     public function withAbilityToSpeakIn(Language ...$languages): self
     {
-        $this->languagesSpoken = $languages;
+        $this->languagesSpoken = array_values($languages);
 
         return $this;
     }
