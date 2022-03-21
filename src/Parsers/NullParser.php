@@ -45,7 +45,7 @@ final class NullParser implements Parser
         return $sequenceItem;
     }
 
-    public function assertRead(int $timesRead): void
+    public function assertRead(int $timesRead = 1): void
     {
         Assert::assertSame($timesRead, $this->timesRead);
     }
