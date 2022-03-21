@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to `ceevee` will be documented in this file.
+All notable changes to `Ceevee` will be documented in this file.
 
-## 1.0.0 - 202X-XX-XX
+## v0.1.0 - 2022-03-21
 
-- initial release
+- Early release. Please note that this is an internal release and should not be used in production.
