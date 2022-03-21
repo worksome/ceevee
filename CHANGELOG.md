@@ -2,6 +2,12 @@
 
 All notable changes to `Ceevee` will be documented in this file.
 
+## v0.2.0 - 2022-03-21
+
+### Added
+
+- Added a `php artisan ceevee:install` command for easier publishing.
+
 ## v0.1.1 - 2022-03-21
 
 ### Fixed
