@@ -2,6 +2,12 @@
 
 All notable changes to `Ceevee` will be documented in this file.
 
+## v0.1.1 - 2022-03-21
+
+### Fixed
+
+- Fixes issue with auto-registration of Service Provider.
+
 ## v0.1.0 - 2022-03-21
 
 - Early release. Please note that this is an internal release and should not be used in production.
