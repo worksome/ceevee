@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Ceevee\Commands;
 
 use Illuminate\Console\Command;
+use Worksome\Ceevee\Providers\CeeveeServiceProvider;
 
 final class InstallCommand extends Command
 {
@@ -15,7 +16,7 @@ final class InstallCommand extends Command
     public function handle(): int
     {
         $this->call('vendor:publish', [
-            '--tag' => 'ceevee',
+            '--provider' => CeeveeServiceProvider::class,
         ]);
 
         return self::SUCCESS;
