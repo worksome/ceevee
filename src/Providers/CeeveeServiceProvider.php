@@ -5,7 +5,7 @@ namespace Worksome\Ceevee\Providers;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Worksome\Ceevee\Ceevee;
-use Worksome\Ceevee\Commands\CeeveeCommand;
+use Worksome\Ceevee\Commands\InstallCommand;
 
 class CeeveeServiceProvider extends PackageServiceProvider
 {
@@ -20,6 +20,6 @@ class CeeveeServiceProvider extends PackageServiceProvider
             ->setBasePath(__DIR__ . '/../')
             ->name('ceevee')
             ->hasConfigFile()
-            ->hasCommand(CeeveeCommand::class);
+            ->hasCommand(InstallCommand::class);
     }
 }
