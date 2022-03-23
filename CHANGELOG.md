@@ -2,6 +2,12 @@
 
 All notable changes to `Ceevee` will be documented in this file.
 
+## v0.3.1 - 2022-03-23
+
+### Fixed
+
+- Changes facade binding to bind to FQCN for dependency injection.
+
 ## v0.3.0 - 2022-03-21
 
 ### Added

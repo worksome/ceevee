@@ -42,6 +42,6 @@ final class Ceevee extends Facade
 
     protected static function getFacadeAccessor(): string
     {
-        return 'ceevee';
+        return \Worksome\Ceevee\Ceevee::class;
     }
 }
