@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Ceevee\Providers;
 
 use Spatie\LaravelPackageTools\Package;
