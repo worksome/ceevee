@@ -13,8 +13,7 @@ use Worksome\Ceevee\Support\CVDetail;
 
 /**
  * @method static CVDetail read(ContentProvider|File|string $file) Read the given resume and return relevant results.
- *
- * @method static void assertRead(int|null $times = null) Ensure that the `read` method has been called at least a given number of times. Note that you need to call `fake` on the facade first.
+ * @method static void     assertRead(int|null $times = null)      Ensure that the `read` method has been called at least a given number of times. Note that you need to call `fake` on the facade first.
  *
  * @see \Worksome\Ceevee\Ceevee
  */

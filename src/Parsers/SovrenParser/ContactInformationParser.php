@@ -44,7 +44,9 @@ final class ContactInformationParser
         }
 
         if (array_key_exists('Telephone', $node)) {
-            $this->contactParts['telephoneNumber'] = $this->cleanPhoneNumber(data_get($node, 'Telephone.FormattedNumber'));
+            $this->contactParts['telephoneNumber'] = $this->cleanPhoneNumber(
+                data_get($node, 'Telephone.FormattedNumber')
+            );
         }
 
         if (array_key_exists('Mobile', $node)) {
@@ -66,7 +68,10 @@ final class ContactInformationParser
             return $number;
         }
 
-        $countryCode = $this->contactParts['countryCode'] ?? data_get($this->details, 'UserArea.sov:ResumeUserArea.sov:Culture.sov:Country');
+        $countryCode = $this->contactParts['countryCode'] ?? data_get(
+            $this->details,
+            'UserArea.sov:ResumeUserArea.sov:Culture.sov:Country'
+        );
 
         if ($countryCode === null) {
             return $number;

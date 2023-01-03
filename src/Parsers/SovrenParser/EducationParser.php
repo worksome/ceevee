@@ -31,7 +31,10 @@ final class EducationParser
     private function buildEducation(array $details): Education
     {
         /** @var string|null $degree */
-        $degree = data_get($details, 'Degree.0.UserArea.sov:DegreeUserArea.sov:NormalizedDegreeName') ?? data_get($details, 'Degree.0.DegreeName');
+        $degree = data_get($details, 'Degree.0.UserArea.sov:DegreeUserArea.sov:NormalizedDegreeName') ?? data_get(
+            $details,
+            'Degree.0.DegreeName'
+        );
         /** @var string|null $field */
         $field = data_get($details, 'Degree.0.DegreeMajor.0.Name.0');
 
@@ -44,7 +47,10 @@ final class EducationParser
 
         return new Education(
             // @phpstan-ignore-next-line
-            data_get($details, 'UserArea.sov:SchoolOrInstitutionTypeUserArea.sov:NormalizedSchoolName') ?? data_get($details, 'School.0.SchoolName'),
+            data_get($details, 'UserArea.sov:SchoolOrInstitutionTypeUserArea.sov:NormalizedSchoolName') ?? data_get(
+                $details,
+                'School.0.SchoolName'
+            ),
             // @phpstan-ignore-next-line
             data_get($details, 'Degree.0.DatesOfAttendance.0.StartDate.Year'),
             // @phpstan-ignore-next-line

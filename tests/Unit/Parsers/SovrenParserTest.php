@@ -15,7 +15,9 @@ it('can make an actual request to Sovren', function () {
 
     expect($details)
         ->monthsOfExperience()->toBe(0)
-        ->summary()->toBe("Administrative support professional offering versatile office management skills and proficiency in Microsoft Office programs. Strong planner and problem solver who readily adapts to change, works independently and exceeds expectations. Able to juggle multiple priorities and meet tight deadlines without compromising quality.");
+        ->summary()->toBe(
+            "Administrative support professional offering versatile office management skills and proficiency in Microsoft Office programs. Strong planner and problem solver who readily adapts to change, works independently and exceeds expectations. Able to juggle multiple priorities and meet tight deadlines without compromising quality."
+        );
 })->group('integration');
 
 it('correctly builds the skill set', function () {
@@ -75,7 +77,7 @@ it('can return links correctly', function () {
     expect($links)
         ->toHaveCount(7)
         ->sequence(
-        // The first 4 links come from actual discovered links
+            // The first 4 links come from actual discovered links
             fn($link) => $link->getName()->toBe('www.linkedin.com'),
             fn($link) => $link->getName()->toBe('github.com/olivernybroe'),
             fn($link) => $link->getName()->toBe('pcservicecenter.dk'),

@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Str;
 use Worksome\Ceevee\Parsers\SovrenParser;
 use Worksome\Ceevee\Tests\Factories\Http\Sovren\SovrenHttpFactory;
 use Worksome\Ceevee\Tests\TestCase;
-use Illuminate\Http\Client\Factory;
 
 uses(TestCase::class)->in(__DIR__ . '/Feature');
 

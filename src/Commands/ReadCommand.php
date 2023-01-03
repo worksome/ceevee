@@ -61,7 +61,12 @@ class ReadCommand extends Command
 
         $this->newLine();
         $this->line('Languages spoken:');
-        $this->info(collect($details->languagesSpoken())->map(fn (Language $language) => $language->getCode())->join(',', ' and '));
+        $this->info(
+            collect($details->languagesSpoken())->map(fn (Language $language) => $language->getCode())->join(
+                ',',
+                ' and '
+            )
+        );
 
         return self::SUCCESS;
     }

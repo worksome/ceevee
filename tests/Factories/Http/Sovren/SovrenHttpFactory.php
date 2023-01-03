@@ -45,7 +45,10 @@ final class SovrenHttpFactory
         $this->makeActualRequest = true;
 
         $this->event->listen(ResponseReceived::class, function (ResponseReceived $event) {
-            file_put_contents($this->getResponseStubFilePath(), json_encode($event->response->json(), JSON_PRETTY_PRINT));
+            file_put_contents(
+                $this->getResponseStubFilePath(),
+                json_encode($event->response->json(), JSON_PRETTY_PRINT)
+            );
         });
 
         return $this;
@@ -72,11 +75,16 @@ final class SovrenHttpFactory
         }
 
         if (! file_exists($this->getResponseStubFilePath())) {
-            throw new InvalidArgumentException("[{$this->getResponseStubFilePath()}] does not exist as a stubbed response. You may need to create it.");
+            throw new InvalidArgumentException(
+                "[{$this->getResponseStubFilePath()}] does not exist as a stubbed response. You may need to create it."
+            );
         }
 
         return $this->client->fake([
-            'https://*.resumeparsing.com/*/parser/resume' => json_decode(file_get_contents($this->getResponseStubFilePath()), true)
+            'https://*.resumeparsing.com/*/parser/resume' => json_decode(
+                file_get_contents($this->getResponseStubFilePath()),
+                true
+            )
         ]);
     }
 
