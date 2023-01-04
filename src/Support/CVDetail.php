@@ -7,11 +7,11 @@ namespace Worksome\Ceevee\Support;
 final class CVDetail
 {
     /**
-     * @param array<int, Skill> $skills
-     * @param array<int, Link> $links
-     * @param array<int, Education> $education
+     * @param array<int, Skill>      $skills
+     * @param array<int, Link>       $links
+     * @param array<int, Education>  $education
      * @param array<int, Employment> $employmentHistory
-     * @param array<int, Language> $languagesSpoken
+     * @param array<int, Language>   $languagesSpoken
      */
     public function __construct(
         private array $skills,

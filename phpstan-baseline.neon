@@ -1,0 +1,116 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/ContactInformationParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/ContactInformationParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/ContactInformationParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EducationParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EducationParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EducationParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LanguageParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LanguageParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LanguageParser.php
+
+		-
+			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:__invoke\\(\\) should return array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Link\\> but returns array\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:directLinks\\(\\) return type with generic class Illuminate\\\\Support\\\\Collection does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:linksFromContactMethods\\(\\) return type with generic class Illuminate\\\\Support\\\\Collection does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects \\(callable\\(mixed, \\(int\\|string\\)\\)\\: bool\\)\\|null, Closure\\(array\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 2
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 2
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 2
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			count: 2
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			count: 2
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: "#^Property Worksome\\\\Ceevee\\\\Support\\\\Skill\\:\\:\\$subSkills \\(array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Skill\\>\\) does not accept array\\<int\\|string, Worksome\\\\Ceevee\\\\Support\\\\Skill\\>\\.$#"
+			count: 1
+			path: src/Support/Skill.php

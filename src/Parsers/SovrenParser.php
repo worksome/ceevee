@@ -62,7 +62,9 @@ final class SovrenParser implements Parser
 
     private function getMonthsOfExperience(array $details): int
     {
-        return intval(data_get($details, 'UserArea.sov:ResumeUserArea.sov:ExperienceSummary.sov:MonthsOfWorkExperience'));
+        return intval(
+            data_get($details, 'UserArea.sov:ResumeUserArea.sov:ExperienceSummary.sov:MonthsOfWorkExperience')
+        );
     }
 
     private function getSummary(array $details): ?string
@@ -117,7 +119,9 @@ final class SovrenParser implements Parser
             'eu' => 'https://eu-rest.resumeparsing.com/v9',
             'us' => 'https://us-rest.resumeparsing.com/v9',
             'au' => 'https://au-rest.resumeparsing.com/v9',
-            default => throw new InvalidArgumentException("[{$this->region}] is not a supported Sovren region. Please use 'eu', 'us' or 'au'."),
+            default => throw new InvalidArgumentException(
+                "[{$this->region}] is not a supported Sovren region. Please use 'eu', 'us' or 'au'."
+            ),
         };
     }
 

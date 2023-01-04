@@ -17,7 +17,10 @@ final class SkillsParser
      */
     public function __invoke(): array
     {
-        $rawSkills = data_get($this->details, 'UserArea.sov:ResumeUserArea.sov:ExperienceSummary.sov:SkillsTaxonomyOutput.sov:TaxonomyRoot.0.sov:Taxonomy');
+        $rawSkills = data_get(
+            $this->details,
+            'UserArea.sov:ResumeUserArea.sov:ExperienceSummary.sov:SkillsTaxonomyOutput.sov:TaxonomyRoot.0.sov:Taxonomy'
+        );
 
         return collect($rawSkills)
             ->filter(fn ($skillDetail) => is_array($skillDetail))
