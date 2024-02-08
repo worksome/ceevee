@@ -1,6 +1,26 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Worksome\\\\Ceevee\\\\Facades\\\\Ceevee facade should not be used\\.$#"
+			count: 1
+			path: src/Commands/ReadCommand.php
+
+		-
+			message: "#^Worksome\\\\Ceevee\\\\Facades\\\\Ceevee facade should not be used\\.$#"
+			count: 1
+			path: src/Facades/Ceevee.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function intval expects array\\|bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function strval expects bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser.php
+
+		-
 			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
 			count: 1
 			path: src/Parsers/SovrenParser/ContactInformationParser.php
@@ -36,6 +56,11 @@ parameters:
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
 
 		-
+			message: "#^Parameter \\#1 \\$value of function strval expects bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
 			message: "#^Unable to resolve the template type TKey in call to function collect$#"
 			count: 1
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
@@ -61,7 +86,7 @@ parameters:
 			path: src/Parsers/SovrenParser/LanguageParser.php
 
 		-
-			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:__invoke\\(\\) should return array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Link\\> but returns array\\.$#"
+			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:__invoke\\(\\) should return array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Link\\> but returns array\\<mixed\\>\\.$#"
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
@@ -76,7 +101,7 @@ parameters:
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects \\(callable\\(mixed, \\(int\\|string\\)\\)\\: bool\\)\\|null, Closure\\(array\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects \\(callable\\(mixed, int\\|string\\)\\: bool\\)\\|null, Closure\\(array\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
