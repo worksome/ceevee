@@ -1,7 +1,7 @@
 # Ceevee
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/ceevee.svg?style=flat-square)](https://packagist.org/packages/worksome/ceevee)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/ceevee/run-tests.yml?label=tests&style=flat-square)](https://github.com/worksome/ceevee/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/ceevee/tests.yml?label=tests&style=flat-square)](https://github.com/worksome/ceevee/actions?query=workflow%3Atests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/worksome/ceevee.svg?style=flat-square)](https://packagist.org/packages/worksome/ceevee)
 
 Simple CV and Resume parsing for Laravel applications.

@@ -7,11 +7,8 @@
     cacheDirectory=".phpunit.cache"
 >
     <testsuites>
-        <testsuite name="Tests">
+        <testsuite name="Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <env name="CEEVEE_DRIVER" value="null"/>
-    </php>
 </phpunit>

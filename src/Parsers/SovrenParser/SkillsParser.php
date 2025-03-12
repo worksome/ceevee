@@ -46,7 +46,7 @@ final class SkillsParser
         }
 
         $subSkills = collect($skillDetail['sov:Subtaxonomy'] ?? $skillDetail['sov:Skill'] ?? [])
-            ->map(fn(array $skillDetail) => $this->buildSkill($skillDetail))
+            ->map(fn (array $skillDetail) => $this->buildSkill($skillDetail))
             ->filter();
 
         return $skill->addSubSkills(...$subSkills);

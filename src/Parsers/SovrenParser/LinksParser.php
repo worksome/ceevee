@@ -45,8 +45,8 @@ final class LinksParser
         $contactMethodDetails = data_get($this->details, 'StructuredXMLResume.ContactInfo.ContactMethod');
 
         return collect($contactMethodDetails)
-            ->filter(fn(array $details) => array_key_exists('InternetWebAddress', $details))
-            ->map(fn(array $details) => new Link(
+            ->filter(fn (array $details) => array_key_exists('InternetWebAddress', $details))
+            ->map(fn (array $details) => new Link(
                 $details['Use'] ?? $details['InternetWebAddress'],
                 $details['InternetWebAddress']
             ));

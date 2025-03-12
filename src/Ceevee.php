@@ -17,7 +17,7 @@ final class Ceevee
 {
     use ForwardsCalls;
 
-    private ?Parser $parser = null;
+    private Parser|null $parser = null;
 
     public function __construct(private ParserManager $parserManager)
     {
@@ -39,7 +39,7 @@ final class Ceevee
      * to `null` or omitted entirely, we will use the
      * `ParserManager` to obtain a Parser instance.
      */
-    public function usingParser(?Parser $parser): self
+    public function usingParser(Parser|null $parser): self
     {
         $this->parser = $parser;
 

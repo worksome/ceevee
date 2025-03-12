@@ -33,11 +33,11 @@ final class SovrenParser implements Parser
         $response = json_decode(strval(data_get($baseRequest, 'Value.ParsedDocument', '[]')), true);
 
         if (! is_array($response)) {
-            $this->failBecauseOfBadResponse("The response from Sovren was malformed.");
+            $this->failBecauseOfBadResponse('The response from Sovren was malformed.');
         }
 
         if (! array_key_exists('Resume', $response)) {
-            $this->failBecauseOfBadResponse("No [Resume] field was detected.");
+            $this->failBecauseOfBadResponse('No [Resume] field was detected.');
         }
 
         $details = $response['Resume'];
@@ -67,7 +67,7 @@ final class SovrenParser implements Parser
         );
     }
 
-    private function getSummary(array $details): ?string
+    private function getSummary(array $details): string|null
     {
         /** @var string|null $summary */
         $summary = data_get($details, 'StructuredXMLResume.ExecutiveSummary');

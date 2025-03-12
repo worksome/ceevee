@@ -7,6 +7,7 @@ namespace Worksome\Ceevee\Support;
 final class Language
 {
     public const FLUENCY_GREAT = 'great';
+
     public const FLUENCY_GOOD = 'good';
 
     public function __construct(
