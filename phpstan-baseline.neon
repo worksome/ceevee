@@ -1,141 +1,313 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Worksome\\\\Ceevee\\\\Facades\\\\Ceevee facade should not be used\\.$#"
+			message: '#^Parameter \#1 \$filePath of static method Worksome\\Ceevee\\Support\\Content\:\:fromPath\(\) expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Commands/ReadCommand.php
 
 		-
-			message: "#^Worksome\\\\Ceevee\\\\Facades\\\\Ceevee facade should not be used\\.$#"
+			message: '#^Parameter \#1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, array\|bool\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/ReadCommand.php
+
+		-
+			message: '#^Part \$filePath \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: src/Commands/ReadCommand.php
+
+		-
+			message: '#^Worksome\\Ceevee\\Facades\\Ceevee facade should not be used\.$#'
+			identifier: larastanStrictRules.noFacadeRule
+			count: 1
+			path: src/Commands/ReadCommand.php
+
+		-
+			message: '#^Cannot call method make\(\) on Illuminate\\Contracts\\Foundation\\Application\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Facades/Ceevee.php
+
+		-
+			message: '#^Worksome\\Ceevee\\Facades\\Ceevee facade should not be used\.$#'
+			identifier: larastanStrictRules.noFacadeRule
 			count: 1
 			path: src/Facades/Ceevee.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function intval expects array\\|bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\NullParser\:\:parse\(\) should return Worksome\\Ceevee\\Support\\CVDetail but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parsers/NullParser.php
+
+		-
+			message: '#^Cannot access offset ''CandidateImage'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Parsers/SovrenParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function strval expects bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\:\:getRequestOptions\(\) should return array\<string, mixed\> but returns array\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Parsers/SovrenParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Parameter \#1 \$value of function intval expects array\|bool\|float\|int\|resource\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser.php
+
+		-
+			message: '#^Parameter \#1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser.php
+
+		-
+			message: '#^Parameter \#5 \$profilePicture of class Worksome\\Ceevee\\Support\\CVDetail constructor expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser.php
+
+		-
+			message: '#^Parameter \#1 \$addressLine of class Worksome\\Ceevee\\Support\\ContactInformation constructor expects string\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/ContactInformationParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Parameter \#1 \$countryCode of static method Worksome\\Ceevee\\Support\\PhonePrefixes\:\:for\(\) expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/ContactInformationParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/ContactInformationParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/ContactInformationParser.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/ContactInformationParser.php
+
+		-
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\EducationParser\:\:__invoke\(\) should return array\<int, Worksome\\Ceevee\\Support\\Education\> but returns array\<Worksome\\Ceevee\\Support\\Education\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Parsers/SovrenParser/EducationParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Parameter \#1 \$details of method Worksome\\Ceevee\\Parsers\\SovrenParser\\EducationParser\:\:buildEducation\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/EducationParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/EducationParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/EducationParser.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/EducationParser.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''\-01'' results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function strval expects bool\\|float\\|int\\|resource\\|string\\|null, mixed given\\.$#"
+			message: '#^Binary operation "\." between mixed and ''\-01\-01'' results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\EmploymentHistoryParser\:\:__invoke\(\) should return array\<int, Worksome\\Ceevee\\Support\\Employment\> but returns array\<Worksome\\Ceevee\\Support\\Employment\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Parameter \#1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/EmploymentHistoryParser.php
+
+		-
+			message: '#^Parameter \#1 \$languageCode of method Worksome\\Ceevee\\Parsers\\SovrenParser\\LanguageParser\:\:buildLanguage\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/LanguageParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/LanguageParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Parameter \#2 \$comments of method Worksome\\Ceevee\\Parsers\\SovrenParser\\LanguageParser\:\:buildLanguage\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/LanguageParser.php
 
 		-
-			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:__invoke\\(\\) should return array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Link\\> but returns array\\<mixed\\>\\.$#"
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/LanguageParser.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/Parsers/SovrenParser/LanguageParser.php
+
+		-
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\LinksParser\:\:__invoke\(\) should return array\<int, Worksome\\Ceevee\\Support\\Link\> but returns array\<mixed\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:directLinks\\(\\) return type with generic class Illuminate\\\\Support\\\\Collection does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\LinksParser\:\:directLinks\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Method Worksome\\\\Ceevee\\\\Parsers\\\\SovrenParser\\\\LinksParser\\:\\:linksFromContactMethods\\(\\) return type with generic class Illuminate\\\\Support\\\\Collection does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\LinksParser\:\:linksFromContactMethods\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of method Illuminate\\\\Support\\\\Collection\\<\\(int\\|string\\),mixed\\>\\:\\:filter\\(\\) expects \\(callable\\(mixed, int\\|string\\)\\: bool\\)\\|null, Closure\\(array\\)\\: bool given\\.$#"
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<\(int\|string\),mixed\>\:\:filter\(\) expects \(callable\(mixed, int\|string\)\: bool\)\|null, Closure\(array\)\: bool given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Parameter \#1 \$name of class Worksome\\Ceevee\\Support\\Link constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Parameter \#2 \$url of class Worksome\\Ceevee\\Support\\Link constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser/LinksParser.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
 			count: 2
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
 			count: 2
 			path: src/Parsers/SovrenParser/LinksParser.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of function collect expects Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\<\\(int\\|string\\), mixed\\>\\|iterable\\<\\(int\\|string\\), mixed\\>\\|null, mixed given\\.$#"
+			message: '#^Method Worksome\\Ceevee\\Parsers\\SovrenParser\\SkillsParser\:\:__invoke\(\) should return array\<int, Worksome\\Ceevee\\Support\\Skill\> but returns array\<Worksome\\Ceevee\\Support\\Skill\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Parsers/SovrenParser/SkillsParser.php
 
 		-
-			message: "#^Unable to resolve the template type TKey in call to function collect$#"
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<\(int\|string\),mixed\>\:\:map\(\) expects callable\(mixed, int\|string\)\: \(Worksome\\Ceevee\\Support\\Skill\|null\), Closure\(array\)\: \(Worksome\\Ceevee\\Support\\Skill\|null\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: '#^Parameter \#1 \$name of class Worksome\\Ceevee\\Support\\Skill constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: '#^Parameter \#1 \$value of function collect expects Illuminate\\Contracts\\Support\\Arrayable\<\(int\|string\), mixed\>\|iterable\<\(int\|string\), mixed\>\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Parsers/SovrenParser/SkillsParser.php
 
 		-
-			message: "#^Unable to resolve the template type TValue in call to function collect$#"
+			message: '#^Parameter \#1 \$value of function intval expects array\|bool\|float\|int\|resource\|string\|null, mixed given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Parsers/SovrenParser/SkillsParser.php
 
 		-
-			message: "#^Property Worksome\\\\Ceevee\\\\Support\\\\Skill\\:\\:\\$subSkills \\(array\\<int, Worksome\\\\Ceevee\\\\Support\\\\Skill\\>\\) does not accept array\\<int\\|string, Worksome\\\\Ceevee\\\\Support\\\\Skill\\>\\.$#"
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: src/Parsers/SovrenParser/SkillsParser.php
+
+		-
+			message: '#^Method Worksome\\Ceevee\\Support\\PhonePrefixes\:\:for\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Support/PhonePrefixes.php
+
+		-
+			message: '#^Property Worksome\\Ceevee\\Support\\Skill\:\:\$subSkills \(array\<int, Worksome\\Ceevee\\Support\\Skill\>\) does not accept array\<int\|string, Worksome\\Ceevee\\Support\\Skill\>\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: src/Support/Skill.php

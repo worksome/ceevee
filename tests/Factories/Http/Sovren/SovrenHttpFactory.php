@@ -84,7 +84,7 @@ final class SovrenHttpFactory
             'https://*.resumeparsing.com/*/parser/resume' => json_decode(
                 file_get_contents($this->getResponseStubFilePath()),
                 true
-            )
+            ),
         ]);
     }
 

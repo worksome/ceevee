@@ -23,7 +23,7 @@ final class EmploymentHistoryParser
 
         return collect($employmentHistory)
             ->filter(fn ($detail) => is_array($detail))
-            ->map(fn(array $detail) => $this->buildEmployment($detail))
+            ->map(fn (array $detail) => $this->buildEmployment($detail))
             ->filter()
             ->all();
     }

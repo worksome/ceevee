@@ -16,7 +16,7 @@ it('can make an actual request to Sovren', function () {
     expect($details)
         ->monthsOfExperience()->toBe(0)
         ->summary()->toBe(
-            "Administrative support professional offering versatile office management skills and proficiency in Microsoft Office programs. Strong planner and problem solver who readily adapts to change, works independently and exceeds expectations. Able to juggle multiple priorities and meet tight deadlines without compromising quality."
+            'Administrative support professional offering versatile office management skills and proficiency in Microsoft Office programs. Strong planner and problem solver who readily adapts to change, works independently and exceeds expectations. Able to juggle multiple priorities and meet tight deadlines without compromising quality.'
         );
 })->group('integration');
 
@@ -27,14 +27,14 @@ it('correctly builds the skill set', function () {
         ->toBeArray()
         ->toHaveCount(8)
         ->sequence(
-            fn($skill) => $skill->percentageOfParent()->toBe(50),
-            fn($skill) => $skill->percentageOfParent()->toBe(23),
-            fn($skill) => $skill->percentageOfParent()->toBe(7),
-            fn($skill) => $skill->percentageOfParent()->toBe(6),
-            fn($skill) => $skill->percentageOfParent()->toBe(5),
-            fn($skill) => $skill->percentageOfParent()->toBe(5),
-            fn($skill) => $skill->percentageOfParent()->toBe(5),
-            fn($skill) => $skill->percentageOfParent()->toBe(0),
+            fn ($skill) => $skill->percentageOfParent()->toBe(50),
+            fn ($skill) => $skill->percentageOfParent()->toBe(23),
+            fn ($skill) => $skill->percentageOfParent()->toBe(7),
+            fn ($skill) => $skill->percentageOfParent()->toBe(6),
+            fn ($skill) => $skill->percentageOfParent()->toBe(5),
+            fn ($skill) => $skill->percentageOfParent()->toBe(5),
+            fn ($skill) => $skill->percentageOfParent()->toBe(5),
+            fn ($skill) => $skill->percentageOfParent()->toBe(0),
         );
 
     expect($skills[0])
@@ -78,14 +78,14 @@ it('can return links correctly', function () {
         ->toHaveCount(7)
         ->sequence(
             // The first 4 links come from actual discovered links
-            fn($link) => $link->getName()->toBe('www.linkedin.com'),
-            fn($link) => $link->getName()->toBe('github.com/olivernybroe'),
-            fn($link) => $link->getName()->toBe('pcservicecenter.dk'),
-            fn($link) => $link->getName()->toBe('www.linkedin.com'),
+            fn ($link) => $link->getName()->toBe('www.linkedin.com'),
+            fn ($link) => $link->getName()->toBe('github.com/olivernybroe'),
+            fn ($link) => $link->getName()->toBe('pcservicecenter.dk'),
+            fn ($link) => $link->getName()->toBe('www.linkedin.com'),
             // The last 3 links come from contact methods
-            fn($link) => $link->getName()->toBe('linkedIn'),
-            fn($link) => $link->getName()->toBe('github'),
-            fn($link) => $link->getName()->toBe('linkedIn'),
+            fn ($link) => $link->getName()->toBe('linkedIn'),
+            fn ($link) => $link->getName()->toBe('github'),
+            fn ($link) => $link->getName()->toBe('linkedIn'),
         );
 });
 
@@ -101,7 +101,7 @@ it('can return the base64 encoded profile picture', function () {
     $sovren = sovrenParser(
         'Han Boetes',
         options: [
-            'OutputCandidateImage' => true
+            'OutputCandidateImage' => true,
         ],
     );
 
@@ -114,7 +114,7 @@ it('will return null for the profile picture of CVs with no provided image', fun
     $sovren = sovrenParser(
         'Hannah Mills',
         options: [
-            'OutputCandidateImage' => true
+            'OutputCandidateImage' => true,
         ],
     );
 
@@ -143,9 +143,9 @@ it('can correctly parse degrees as part of education', function () {
     expect($education)
         ->toBeArray()->toHaveCount(3)
         ->sequence(
-            fn($uni) => $uni->getDegree()->toBe('Bachelors'),
-            fn($udacity) => $udacity->getDegree()->toBeNull(),
-            fn($uni) => $uni->getDegree()->toBe('Bachelors'),
+            fn ($uni) => $uni->getDegree()->toBe('Bachelors'),
+            fn ($udacity) => $udacity->getDegree()->toBeNull(),
+            fn ($uni) => $uni->getDegree()->toBe('Bachelors'),
         );
 
     expect($education[0])
@@ -162,26 +162,26 @@ it('can return contact information', function (string $name, $expectations) {
 })->with([
     [
         'Oliver Nybroe',
-        fn() => fn ($information) => $information
+        fn () => fn ($information) => $information
             ->getMunicipality()->toBe('Copenhagen')
             ->getCountryCode()->toBe('DK')
-            ->getEmailAddress()->toBe('olivernybroe@gmail.com')
+            ->getEmailAddress()->toBe('olivernybroe@gmail.com'),
     ],
     [
         'Han Boetes',
-        fn() => fn ($information) => $information
+        fn () => fn ($information) => $information
             ->getTelephoneNumber()->toBe('+43 6 8181 5268 21')
-            ->getEmailAddress()->toBe('hboetes@gmail.com')
+            ->getEmailAddress()->toBe('hboetes@gmail.com'),
     ],
     [
         'Hannah Mills',
-        fn() => fn($information) => $information
+        fn () => fn ($information) => $information
             ->getAddressLine()->toBe('189 Chobham Gardens')
             ->getMunicipality()->toBe('Putney')
             ->getCountryCode()->toBe('UK')
             ->getMobileNumber()->toBe('+44 077777722')
-            ->getEmailAddress()->toBe('hannah.mills@gmailing.com')
-    ]
+            ->getEmailAddress()->toBe('hannah.mills@gmailing.com'),
+    ],
 ]);
 
 it('includes employment history', function () {

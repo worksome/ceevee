@@ -20,8 +20,8 @@ final class EducationParser
         $educationDetails = data_get($this->details, 'StructuredXMLResume.EducationHistory.SchoolOrInstitution');
 
         return collect($educationDetails)
-            ->filter(fn(mixed $details) => is_array($details))
-            ->map(fn(array $details) => $this->buildEducation($details))
+            ->filter(fn (mixed $details) => is_array($details))
+            ->map(fn (array $details) => $this->buildEducation($details))
             ->all();
     }
 
