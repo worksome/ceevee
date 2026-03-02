@@ -19,6 +19,7 @@ class ReadCommand extends Command
 
     public function handle(): int
     {
+        // @phpstan-ignore argument.type
         $filePath = strval($this->argument('resume'));
 
         $this->info("Retrieving details for resume [{$filePath}]...");

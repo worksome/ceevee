@@ -7,12 +7,6 @@ parameters:
 			path: src/Commands/ReadCommand.php
 
 		-
-			message: '#^Parameter \#1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, array\|bool\|string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Commands/ReadCommand.php
-
-		-
 			message: '#^Part \$filePath \(mixed\) of encapsed string cannot be cast to string\.$#'
 			identifier: encapsedStringPart.nonString
 			count: 1
