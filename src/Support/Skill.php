@@ -13,7 +13,7 @@ final class Skill
 
     private int $percentageOfParent = 0;
 
-    public function __construct(private string $name)
+    public function __construct(private readonly string $name)
     {
     }
 

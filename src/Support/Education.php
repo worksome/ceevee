@@ -7,11 +7,11 @@ namespace Worksome\Ceevee\Support;
 final class Education
 {
     public function __construct(
-        private string|null $name,
-        private string|null $fromYear,
-        private string|null $toYear,
-        private string|null $degree,
-        private string|null $field,
+        private readonly string|null $name,
+        private readonly string|null $fromYear,
+        private readonly string|null $toYear,
+        private readonly string|null $degree,
+        private readonly string|null $field,
     ) {
     }
 

@@ -20,9 +20,9 @@ final class SovrenHttpFactory
 
     private string $cv = 'hannah_mills';
 
-    private Factory $client;
+    private readonly Factory $client;
 
-    private Dispatcher $event;
+    private readonly Dispatcher $event;
 
     public function __construct()
     {

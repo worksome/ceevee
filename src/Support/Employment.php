@@ -7,14 +7,14 @@ namespace Worksome\Ceevee\Support;
 final class Employment
 {
     public function __construct(
-        private string|null $type,
-        private string|null $company,
-        private string|null $name,
-        private string|null $description,
-        private string|null $municipality,
-        private string|null $countryCode,
-        private string|null $startDate,
-        private string|null $endDate,
+        private readonly string|null $type,
+        private readonly string|null $company,
+        private readonly string|null $name,
+        private readonly string|null $description,
+        private readonly string|null $municipality,
+        private readonly string|null $countryCode,
+        private readonly string|null $startDate,
+        private readonly string|null $endDate,
     ) {
     }
 

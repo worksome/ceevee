@@ -8,7 +8,7 @@ use Worksome\Ceevee\Support\Language;
 
 final class LanguageParser
 {
-    public function __construct(private array $details)
+    public function __construct(private readonly array $details)
     {
     }
 

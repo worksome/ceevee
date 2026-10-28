@@ -9,7 +9,7 @@ use Worksome\Ceevee\Contracts\ContentProvider;
 
 final class FilePathContentProvider implements ContentProvider
 {
-    public function __construct(private string $filePath)
+    public function __construct(private readonly string $filePath)
     {
     }
 

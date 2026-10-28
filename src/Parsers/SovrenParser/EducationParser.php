@@ -8,7 +8,7 @@ use Worksome\Ceevee\Support\Education;
 
 final class EducationParser
 {
-    public function __construct(private array $details)
+    public function __construct(private readonly array $details)
     {
     }
 

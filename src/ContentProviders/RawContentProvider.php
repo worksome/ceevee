@@ -8,7 +8,7 @@ use Worksome\Ceevee\Contracts\ContentProvider;
 
 final class RawContentProvider implements ContentProvider
 {
-    public function __construct(private string $rawContent)
+    public function __construct(private readonly string $rawContent)
     {
     }
 

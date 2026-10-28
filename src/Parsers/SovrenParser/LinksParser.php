@@ -9,7 +9,7 @@ use Worksome\Ceevee\Support\Link;
 
 final class LinksParser
 {
-    public function __construct(private array $details)
+    public function __construct(private readonly array $details)
     {
     }
 

@@ -11,8 +11,8 @@ final class Language
     public const FLUENCY_GOOD = 'good';
 
     public function __construct(
-        private string $code,
-        private string|null $fluency,
+        private readonly string $code,
+        private readonly string|null $fluency,
     ) {
     }
 

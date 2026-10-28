@@ -19,7 +19,7 @@ final class ContactInformationParser
         'emailAddress' => null,
     ];
 
-    public function __construct(private array $details)
+    public function __construct(private readonly array $details)
     {
     }
 
@@ -64,7 +64,7 @@ final class ContactInformationParser
             return null;
         }
 
-        if (substr($number, 0, 1) === '+') {
+        if (str_starts_with($number, '+')) {
             return $number;
         }
 
@@ -84,7 +84,7 @@ final class ContactInformationParser
             return null;
         }
 
-        if (substr($strippedNumber, 0, strlen($prefix)) === $prefix) {
+        if (str_starts_with($strippedNumber, $prefix)) {
             return $number;
         }
 

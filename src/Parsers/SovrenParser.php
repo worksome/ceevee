@@ -19,11 +19,11 @@ use Worksome\Ceevee\Support\CVDetail;
 final class SovrenParser implements Parser
 {
     public function __construct(
-        private Factory $client,
-        private string $accountId,
-        private string $serviceKey,
-        private string $region = 'eu',
-        private array $options = [],
+        private readonly Factory $client,
+        private readonly string $accountId,
+        private readonly string $serviceKey,
+        private readonly string $region = 'eu',
+        private readonly array $options = [],
     ) {
     }
 
@@ -125,10 +125,7 @@ final class SovrenParser implements Parser
         };
     }
 
-    /**
-     * @return never-return
-     */
-    private function failBecauseOfBadResponse(string|null $reason = null): void
+    private function failBecauseOfBadResponse(string|null $reason = null): never
     {
         throw new InvalidArgumentException("The response from Sovren could not be parsed. $reason");
     }

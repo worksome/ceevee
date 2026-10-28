@@ -14,16 +14,16 @@ final class CVDetail
      * @param array<int, Language>   $languagesSpoken
      */
     public function __construct(
-        private array $skills,
-        private int|null $monthsOfExperience,
-        private string|null $summary,
-        private array $links,
-        private string|null $profilePicture,
-        private array $education,
-        private ContactInformation $contactInformation,
-        private array $employmentHistory,
-        private array $languagesSpoken,
-        private mixed $rawResponse = null,
+        private readonly array $skills,
+        private readonly int|null $monthsOfExperience,
+        private readonly string|null $summary,
+        private readonly array $links,
+        private readonly string|null $profilePicture,
+        private readonly array $education,
+        private readonly ContactInformation $contactInformation,
+        private readonly array $employmentHistory,
+        private readonly array $languagesSpoken,
+        private readonly mixed $rawResponse = null,
     ) {
     }
 

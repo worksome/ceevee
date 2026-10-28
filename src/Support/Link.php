@@ -7,8 +7,8 @@ namespace Worksome\Ceevee\Support;
 final class Link
 {
     public function __construct(
-        private string $name,
-        private string $url,
+        private readonly string $name,
+        private readonly string $url,
     ) {
     }
 

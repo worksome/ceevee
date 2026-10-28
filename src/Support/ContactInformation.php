@@ -7,13 +7,13 @@ namespace Worksome\Ceevee\Support;
 final class ContactInformation
 {
     public function __construct(
-        private string|null $addressLine,
-        private string|null $municipality,
-        private string|null $postalCode,
-        private string|null $countryCode,
-        private string|null $telephoneNumber,
-        private string|null $mobileNumber,
-        private string|null $emailAddress,
+        private readonly string|null $addressLine,
+        private readonly string|null $municipality,
+        private readonly string|null $postalCode,
+        private readonly string|null $countryCode,
+        private readonly string|null $telephoneNumber,
+        private readonly string|null $mobileNumber,
+        private readonly string|null $emailAddress,
     ) {
     }
 

@@ -10,7 +10,7 @@ use Worksome\Ceevee\Contracts\ContentProvider;
 
 final class FileContentProvider implements ContentProvider
 {
-    public function __construct(private File $file)
+    public function __construct(private readonly File $file)
     {
     }
 

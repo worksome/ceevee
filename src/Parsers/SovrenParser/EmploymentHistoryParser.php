@@ -10,7 +10,7 @@ use Worksome\Ceevee\Support\Employment;
 
 final class EmploymentHistoryParser
 {
-    public function __construct(private array $details)
+    public function __construct(private readonly array $details)
     {
     }
 
